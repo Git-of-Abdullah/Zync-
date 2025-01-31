@@ -115,7 +115,7 @@ exports.signup = async(req,res) =>
             res.status(400).json(
                 {
                     status: "fail",
-                    message: error 
+                    message: "Email is already in use. Please use a different email."
                   
                 })
 
@@ -187,7 +187,7 @@ exports.login = async(req,res) =>
             res.status(404).json(
                 {
                     status: 400,
-                    message: error
+                    message: error.message
                 }
             )
 
