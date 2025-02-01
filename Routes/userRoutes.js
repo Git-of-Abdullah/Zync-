@@ -5,6 +5,7 @@ const router = express.Router()
 const upload = require("../utils/multer")
 
 
+router.get("/notifications",userController.authenticate, userController.getNotifications )
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
 router.post('/forgotPassword', userController.forgotPassword)

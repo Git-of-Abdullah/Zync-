@@ -1,6 +1,8 @@
 const Post = require('../Models/postModel')
 const User = require('../Models/userModel')
 
+const Notification = require('../Models/notificationModel')
+
 
 const cloudinary = require("../utils/cloudinaryConfig")
 
@@ -237,6 +239,12 @@ exports.likePost = async (req, res) =>
             if(!(post.likes.includes(userId)))
                 {
                     post.likes.push(userId)
+                    const notification = {
+                         receiver : post.user,
+                        sender :  userId,
+                        content: "liked Post"
+                    }
+                   await Notification.create(notification)
 
                     await post.save({validateBeforeSave : false})
 

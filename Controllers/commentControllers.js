@@ -30,6 +30,12 @@ exports.postComment = async(req,res) =>
                 content
             }
         )
+        const notification = {
+            receiver : post.user,
+            sender :   userId,
+           content: "Commented on the Post"
+        }
+      await Notification.create(notification)
         //push to comment to posts also
         post.comments.push(newComment._id);
         await post.save({validateBeforeSave : false})

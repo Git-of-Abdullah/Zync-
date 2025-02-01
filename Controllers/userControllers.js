@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const util = require("util")
 const nodemailer = require("nodemailer")
 const cloudinary = require("../utils/cloudinaryConfig")
+const Notification = require('../Models/notificationModel')
 
 const signToken = (id) => 
     {
@@ -523,6 +524,12 @@ exports.followUser = async(req,res) =>
                 targetUser.followers.push(loggedUserId);
                 await loggedUser.save({validateBeforeSave: false});
                 await targetUser.save({validateBeforeSave: false});
+                const notification = {
+                    receiver : targetUser._id,
+                    sender :   loggedUser._id,
+                   content: "Followed you"
+                }
+              await Notification.create(notification)
 
             res.status(200).json(
                 {
@@ -674,3 +681,45 @@ exports.followUser = async(req,res) =>
             
                     }
                 }
+
+ exports.getNotifications = async(req,res) =>
+ {
+    const userId = req.user.id
+    try{
+       
+    const notifications = await Notification.find({receiver : userId}) 
+    .populate('sender', 'name profilePic')  // Populating sender's username and pfp
+    .populate('receiver', 'name profilePic')
+    .sort({ createdAt: -1 })
+
+    if(!notifications)
+        {
+            return res.status(404).json(
+                {
+                    status: "success",
+                    message: "No notifications for user"
+                }
+            )
+        }
+
+    return res.status(200).json(
+        {
+            status: "success",
+            data: 
+            {
+                notifications
+            }
+        }
+    )
+
+    }catch(error)
+    {
+        res.status(500).json(
+            {
+                status: "failed",
+                message: error.message 
+            }
+        )
+    }
+    
+ }
