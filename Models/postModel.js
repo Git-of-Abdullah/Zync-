@@ -19,7 +19,12 @@ const postSchema = mongoose.Schema(
             type: String,
             required : [true, 'content is required for post']
         }],
-
+        location : 
+        {
+            type: String,
+            maxlength : 25,
+            required: [true, "Please Provide the Post Location"]
+        },
         //**************************************************************************************************** */
         likes: [{
             type: mongoose.Schema.Types.ObjectId,

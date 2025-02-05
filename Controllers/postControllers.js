@@ -86,6 +86,7 @@ exports.createPost = async (req,res) =>
         const cont = JSON.parse(req.body.content)
         newPost.user = userId 
         newPost.content = cont.content
+        newPost.location = cont.location
 
         const uploadPromise = req.files.map((file) => {
             return cloudinary.uploader.upload(file.path, {folder : 'Zync/posts', resource_type : 'auto'})
