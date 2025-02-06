@@ -243,7 +243,7 @@ exports.likePost = async (req, res) =>
                     const notification = {
                          receiver : post.user,
                         sender :  userId,
-                        content: "liked Post"
+                        content: "liked your post"
                     }
                    await Notification.create(notification)
 
@@ -338,11 +338,19 @@ exports.likePost = async (req, res) =>
 
             try{
                 const user = await User.findById(userId)
+                console.log(user)
                 if (!user) {
                     return res.status(404).json({
                         status: "error",
                         message: 'User not found'
                      });
+                }
+                
+                if (!Array.isArray(user.following) || user.following.length === 0) {
+                    return res.status(200).json({
+                        status: "success",
+                        message: "No following users to fetch posts"
+                    });
                 }
                 const posts = await Post.find({ user: { $in: user.following } })
                         .populate('user', 'name profilePic') // Include user details in each post

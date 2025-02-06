@@ -1,6 +1,7 @@
 const { validate } = require("mongoose-validator")
 const Comment = require("../Models/commentModel")
 const Post = require("../Models/postModel")
+const Notification = require("../Models/notificationModel")
 
 
 
@@ -33,7 +34,7 @@ exports.postComment = async(req,res) =>
         const notification = {
             receiver : post.user,
             sender :   userId,
-           content: "Commented on the Post"
+           content: "Commented on your post"
         }
       await Notification.create(notification)
         //push to comment to posts also

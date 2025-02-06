@@ -527,7 +527,7 @@ exports.followUser = async(req,res) =>
                 const notification = {
                     receiver : targetUser._id,
                     sender :   loggedUser._id,
-                   content: "Followed you"
+                   content: "Started following you"
                 }
               await Notification.create(notification)
 

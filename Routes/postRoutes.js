@@ -9,11 +9,13 @@ const router = express.Router();
 
 
 router.get('/',userController.authenticate, postController.getAllPosts) //zync/api/posts
+router.get("/feed", userController.authenticate, postController.getFeed)
 router.get('/:id',userController.authenticate, postController.getPostById)
+
 router.post('/',userController.authenticate,upload.array('media', 3), postController.createPost) //zync/api/posts
 router.put('/:id',userController.authenticate, postController.changePost)
 router.patch('/:id',userController.authenticate, postController.changePost)
-router.get("/feed", userController.authenticate, postController.getFeed)
+
 
 router.delete('/:id',userController.authenticate, postController.deletePost)
 
