@@ -241,7 +241,7 @@ exports.likePost = async (req, res) =>
                 {
                     post.likes.push(userId)
                     const notification = {
-                         receiver : post.user,
+                        receiver : post.user,
                         sender :  userId,
                         content: "liked your post"
                     }

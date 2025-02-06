@@ -62,7 +62,6 @@ const signToken = (id) =>
                 message: "Error in querying user"
 
             })}
-
             if(!user)
                 {
                     return res.status(400).json({
@@ -310,7 +309,6 @@ exports.resetPassword = async(req,res) =>
             //4. update password
             user.password = pswd
             user.passwordChangedAt = Date.now()
-            console.log(user)
             //5. save password
             await user.save({validateBeforeSave: false})
 
@@ -628,7 +626,7 @@ exports.followUser = async(req,res) =>
                             status : "success",
                             data : 
                             {
-                                user
+                                followers : user.followers
                             }
                         }
                     )
