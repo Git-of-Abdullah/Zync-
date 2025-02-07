@@ -300,7 +300,7 @@ exports.getReplies = async( req, res) =>
             
             try {
                 // Find the comment by ID
-                const comment = await Comment.findById(commentId);
+                const comment = await Comment.findById(commentId) .populate("replies.user", "name profilePic");;
         
                 // Check if the comment exists
                 if (!comment) {
