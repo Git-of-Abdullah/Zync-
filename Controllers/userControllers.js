@@ -5,6 +5,8 @@ const util = require("util")
 const nodemailer = require("nodemailer")
 const cloudinary = require("../utils/cloudinaryConfig")
 const Notification = require('../Models/notificationModel')
+const  StreamChat = require("stream-chat").StreamChat;
+
 
 const signToken = (id) => 
     {
@@ -122,6 +124,47 @@ exports.signup = async(req,res) =>
         }
         
 
+    }
+
+
+    exports.getStreamToken = async(req,res) =>
+    {
+        try{
+
+            const userId = req.user.id;
+            const key = process.env.STREAM_KEY
+            const secret = process.env.STREAM_SECRET
+    
+            if(!(userId))
+                {
+                    return res.status(401).json(
+                        {
+                            status: "error",
+                            message: "Unauthorized"
+                        }
+                    )
+                }
+            
+            const serverClient = StreamChat.getInstance(key,secret)
+    
+            const chatToken = serverClient.createToken(userId.toString())
+    
+            res.status(200).json({
+                status: "success",
+                token : chatToken
+            })
+        }catch(error)
+        {
+            res.status(500).json({
+                status: "error",
+                message: error.message
+            })
+        }
+
+
+        
+
+        
     }
 
 exports.login = async(req,res) =>

@@ -19,6 +19,6 @@ router.post("/unfollow/:id",userController.authenticate, userController.unfollow
 router.get("/followers/:id", userController.authenticate, userController.getFollowers )
 router.get("/following/:id", userController.authenticate, userController.getFollowing )
 
-
+router.get("/getStreamToken", userController.authenticate, userController.getStreamToken)
 
 module.exports = router;
