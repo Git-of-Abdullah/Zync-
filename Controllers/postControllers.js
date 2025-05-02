@@ -36,7 +36,7 @@ exports.getPostById = async(req,res) =>
         const id = req.params.id 
     
     try{
-          const post = await Post.findById(id)
+          const post = await Post.findById(id).populate("user")
          if (!post) {
             return res.status(404).json({
                 status: 'fail',
@@ -48,7 +48,6 @@ exports.getPostById = async(req,res) =>
 
             {
                 status: 'success',
-                message: 'post is deleted',
                 data: post
             }
          )

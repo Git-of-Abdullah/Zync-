@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors({
     origin: "http://localhost:5173", // Allow your frontend to access the backend
     credentials: true, // Allow cookies, authorization headers, etc.
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed request methods
+    methods: ["GET", "POST", "PUT","PATCH", "DELETE"], // Allowed request methods
     allowedHeaders: ["Content-Type", "Authorization"] // Allow these headers in requests
 }));
 app.use('/zync/api/posts' , postRouter)

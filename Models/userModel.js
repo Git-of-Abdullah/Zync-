@@ -23,7 +23,9 @@ const userSchema = mongoose.Schema( //name, email, password, confirm password, p
         bio:
         {
             type : String ,
-            maxlength : 150
+            maxlength : 150,
+            default: "Hi I've Joined Zync also"
+            
         },
         profilePic: 
         {

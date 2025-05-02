@@ -1,4 +1,5 @@
 const User = require('../Models/userModel')
+const Post = require("../Models/postModel")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const util = require("util")
@@ -497,12 +498,14 @@ exports.getUserById = async(req,res) =>
 
     exports.getProfile = async(req,res) =>
         {
-            const id = req.user.id
+            const id = req.params.id
             
     
             try
             {
                 const user = await User.findById(id).select("-password")
+                const posts = await Post.find({user : user._id})
+                console.log(posts);
                 if(!user)
                     {
                        return  res.status(404).json(
@@ -517,7 +520,8 @@ exports.getUserById = async(req,res) =>
                         {
                             status : 'successfull',
                             data :{
-                                user
+                                user,
+                                posts
                             }
                         }
                     )
