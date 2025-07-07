@@ -20,5 +20,6 @@ router.get("/followers/:id", userController.authenticate, userController.getFoll
 router.get("/following/:id", userController.authenticate, userController.getFollowing )
 
 router.get("/getStreamToken", userController.authenticate, userController.getStreamToken)
+router.get("/searchUsers", userController.authenticate, userController.searchUsers)
 
 module.exports = router;

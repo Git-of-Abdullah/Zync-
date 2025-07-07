@@ -768,3 +768,25 @@ exports.followUser = async(req,res) =>
     }
     
  }
+
+
+ //search users
+ // Controller example: search users by name
+exports.searchUsers = async (req, res) => {
+    try {
+      const nameQuery = req.query.name;
+      if (!nameQuery) {
+        return res.status(400).json({ status: "fail", message: "Missing search query" });
+      }
+  
+      
+      const users = await User.find({
+        name: { $regex: nameQuery, $options: "i" }
+      }).select("name profilePic _id"); // Return only necessary fields
+  
+      res.status(200).json({ status: "success", data: users });
+    } catch (err) {
+      res.status(500).json({ status: "error", message: err.message });
+    }
+  };
+  

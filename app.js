@@ -12,7 +12,7 @@ dotenv.config({path: './config.env'});
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173", // Allow your frontend to access the backend
+    origin: "http://localhost:5173", // Allow frontend to access the backend
     credentials: true, // Allow cookies, authorization headers, etc.
     methods: ["GET", "POST", "PUT","PATCH", "DELETE"], // Allowed request methods
     allowedHeaders: ["Content-Type", "Authorization"] // Allow these headers in requests
