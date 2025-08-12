@@ -93,7 +93,7 @@ userSchema.pre('save', async function(next)
 //             else
 //              console.log(result)
 //         })
-//     } this function doesnt work and idk why lmao
+//     } this function doesnt work and idk why 
 
 
 userSchema.methods.isPasswordChanged = async function(JWTtimestamp) {

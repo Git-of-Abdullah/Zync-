@@ -505,7 +505,7 @@ exports.getUserById = async(req,res) =>
             {
                 const user = await User.findById(id).select("-password")
                 const posts = await Post.find({user : user._id})
-                console.log(posts);
+                //console.log(posts);
                 if(!user)
                     {
                        return  res.status(404).json(
