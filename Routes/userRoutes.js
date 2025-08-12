@@ -21,5 +21,5 @@ router.get("/following/:id", userController.authenticate, userController.getFoll
 
 router.get("/getStreamToken", userController.authenticate, userController.getStreamToken)
 router.get("/searchUsers", userController.authenticate, userController.searchUsers)
-
+router.get("/chat/:id", userController.authenticate, userController.getMessages )
 module.exports = router;

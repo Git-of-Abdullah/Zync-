@@ -6,7 +6,8 @@ const util = require("util")
 const nodemailer = require("nodemailer")
 const cloudinary = require("../utils/cloudinaryConfig")
 const Notification = require('../Models/notificationModel')
-const  StreamChat = require("stream-chat").StreamChat;
+const  StreamChat = require("stream-chat").StreamChat
+const Message = require("../Models/messageModel")
 
 
 const signToken = (id) => 
@@ -790,3 +791,25 @@ exports.searchUsers = async (req, res) => {
     }
   };
   
+
+
+  exports.getMessages = async(req,res) => 
+  {
+     try {
+    const currentUserId = req.user.id; 
+    const otherUserId = req.params.id;
+
+    const messages = await Message.find({
+      $or: [
+        { sender: currentUserId, receiver: otherUserId },
+        { sender: otherUserId, receiver: currentUserId }
+      ]
+    }).sort({ timestamp: 1 });
+
+    console.log(messages)
+
+    res.json({ success: true, messages });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+  }
