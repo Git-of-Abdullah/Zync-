@@ -14,8 +14,8 @@ router.patch('/updateUser', userController.authenticate, userController.updateUs
 router.patch('/updatePfp', userController.authenticate,upload.single("profilePic"), userController.updatepfp)
 router.get('/getUserById/:id', userController.authenticate, userController.getUserById)
 router.get('/getProfile/:id', userController.authenticate, userController.getProfile)
-router.post("/follow/:id",userController.authenticate, userController.followUser )
-router.post("/unfollow/:id",userController.authenticate, userController.unfollowUser )
+router.post("/follow/:id",userController.authenticate, userController.ConnectionRequest )
+// router.post("/unfollow/:id",userController.authenticate, userController.unfollowUser )
 router.get("/followers/:id", userController.authenticate, userController.getFollowers )
 router.get("/following/:id", userController.authenticate, userController.getFollowing )
 

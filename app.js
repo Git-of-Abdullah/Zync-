@@ -31,7 +31,7 @@ io.use((socket, next) => {
     try {
         const user = jwt.verify(token, process.env.SECRET_STRING);
         socket.user = user;
-        console.log(socket.user);
+        
         next();
     } catch (err) {
         next(new Error("Invalid token"));
@@ -40,7 +40,7 @@ io.use((socket, next) => {
 
 // Chat handling
 io.on("connection", (socket) => {
-    console.log("User Connected: ", socket.user);
+
 
 
     socket.join(socket.user.id)
@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
       socket.on("disconnect", () => {
     console.log("User disconnected:", socket.user.username);
   });
-
+ 
 })})
 
 // Middlewares
@@ -80,4 +80,4 @@ app.use('/zync/api/auth/user', userRouter);
 app.use("/zync/api/comments", commentRouter);
 
 // Export the HTTP server, NOT the Express app
-module.exports = server;
+module.exports =  {io , server}; // This is the server that will be used in server.js};

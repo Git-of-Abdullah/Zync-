@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const notificationSchema = new mongoose.Schema(
+const FollowRequestSchema = new mongoose.Schema(
     {
         receiver: { 
             type: mongoose.Schema.Types.ObjectId, 
@@ -14,13 +14,13 @@ const notificationSchema = new mongoose.Schema(
             required: true 
         }, // The user who triggered the notification
         
-        content: {
-            type: String,
-            required:[true, "notification content is required"]
+        IsApproved: {
+            type: Boolean,
+            default: false,
         },
     },{timestamps: true}
 );
 
-const Notification = mongoose.model("Notification", notificationSchema);
+const Notification = mongoose.model("Follow Request", FollowRequestSchema);
 
 module.exports = Notification;

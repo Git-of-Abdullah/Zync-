@@ -1,6 +1,6 @@
 const dotenv = require("dotenv")
 dotenv.config({path: "./config.env"});
-const app = require('./app');
+const app = require('./app').server;
 const mongoose = require('mongoose')
 
 mongoose.connect( process.env.DB_URL , {})
